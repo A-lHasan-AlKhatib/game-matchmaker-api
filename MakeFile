@@ -1,0 +1,8 @@
+run:
+	go run ./cmd/game-matchmaker-api
+
+build:
+	go build -o bin/server ./cmd/game-matchmaker-api
+
+test:
+	go test ./...

@@ -1,0 +1,16 @@
+# Go
+bin/
+*.out
+*.exe
+/vendor/
+*.test
+
+# Dependency directories
+vendor/
+
+# IDE
+.idea/
+
+# Environment variables and logs
+.env
+*.log
