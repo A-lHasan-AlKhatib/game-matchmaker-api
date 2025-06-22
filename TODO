@@ -1,5 +1,0 @@
-[ ] Add ci.yaml in .github file
-[ ] in api folder, add:
-    [ ] openapi.yaml: OpenAPI definition
-    [ ] gen/: folder for generated types (e.g., via oapi-codegen)
-[ ] Add lint ci
