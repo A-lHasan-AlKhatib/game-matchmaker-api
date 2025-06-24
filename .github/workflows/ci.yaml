@@ -1,4 +1,4 @@
-name: dummy
+name: Go Build Pipeline
 
 on:
     push:
@@ -7,8 +7,16 @@ on:
         branches: [ '**' ]
 
 jobs:
-    dummy:
+    go-build:
         runs-on: ubuntu-latest
         steps:
-            - name: Always succeed
-              run: echo "Dummy check" && true
+            -   name: Checkout code
+                uses: actions/checkout@v4
+            -   name: Set up Go
+                uses: actions/setup-go@v5
+                with:
+                    go-version-file: go.mod
+            -   name: Install dependencies
+                run: go mod download
+            -   name: Build
+                run: go build ./...
