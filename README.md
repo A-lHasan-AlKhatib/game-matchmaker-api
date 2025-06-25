@@ -12,5 +12,17 @@ An API-first backend service built with Go to help users organize friendly sport
 
 ## Getting Started
 
-```bash
-make dev
+## Development commands 🛠
+
+| Command | What it does |
+|---------|--------------|
+| `make tidy` | Tidy and verify Go modules |
+| `make build` | Compile the binary to `./main` |
+| `make run` | Build then run the server on port 8080 |
+| `make test` | Run all unit & integration tests |
+| `make docker-build` | Build the Docker image (`game-matchmaker-api:local`) |
+| `make docker-run` | Build the image and run it, exposing port 8080 |
+| `make fmt` / `make vet` | Formatting & static analysis |
+| `make clean` | Remove compiled binary |
+
+Run `make` without arguments to see all targets.
