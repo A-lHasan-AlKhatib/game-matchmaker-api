@@ -2,6 +2,10 @@
 bin/
 *.out
 *.exe
+*.exe~
+*.dll
+*.so
+*.dylib
 /vendor/
 *.test
 
@@ -15,3 +19,14 @@ vendor/
 .env
 *.log
 TODO
+
+# Go workspace file
+go.work
+tmp/
+
+# Project build
+main
+*templ.go
+
+# OS X generated file
+.DS_Store
