@@ -1,39 +1,39 @@
 package server
 
 import (
-    "fmt"
-    "net/http"
-    "os"
-    "strconv"
-    "time"
+	"fmt"
+	"net/http"
+	"os"
+	"strconv"
+	"time"
 
-    _ "github.com/joho/godotenv/autoload"
+	_ "github.com/joho/godotenv/autoload"
 
-    "github.com/A-lHasan-AlKhatib/game-matchmaker-api/internal/database"
+	"github.com/A-lHasan-AlKhatib/game-matchmaker-api/internal/database"
 )
 
 type Server struct {
-    port int
+	port int
 
-    db database.Service
+	db database.Service
 }
 
 func NewServer() *http.Server {
-    port, _ := strconv.Atoi(os.Getenv("PORT"))
-    NewServer := &Server{
-        port: port,
+	port, _ := strconv.Atoi(os.Getenv("PORT"))
+	NewServer := &Server{
+		port: port,
 
-        db: database.New(),
-    }
+		db: database.New(),
+	}
 
-    // Declare Server config
-    server := &http.Server{
-        Addr:         fmt.Sprintf(":%d", NewServer.port),
-        Handler:      NewServer.RegisterRoutes(),
-        IdleTimeout:  time.Minute,
-        ReadTimeout:  10 * time.Second,
-        WriteTimeout: 30 * time.Second,
-    }
+	// Declare Server config
+	server := &http.Server{
+		Addr:         fmt.Sprintf(":%d", NewServer.port),
+		Handler:      NewServer.RegisterRoutes(),
+		IdleTimeout:  time.Minute,
+		ReadTimeout:  10 * time.Second,
+		WriteTimeout: 30 * time.Second,
+	}
 
-    return server
+	return server
 }
