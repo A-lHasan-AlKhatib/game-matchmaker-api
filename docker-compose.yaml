@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+    psql_db:
+        image: postgres:15
+        container_name: matchmaker-db
+        restart: unless-stopped
+        environment:
+            POSTGRES_USER: root
+            POSTGRES_PASSWORD: root
+            POSTGRES_DB: matchdb
+        ports:
+            - "5432:5432"
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+
+    api:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: matchmaker-api
+        ports:
+            - "8080:8080"
+        env_file:
+            - .env
+        depends_on:
+            - psql_db
+
+volumes:
+    pgdata:

@@ -1,0 +1,19 @@
+# Version control and config
+.git
+.gitignore
+.dockerignore
+
+# Local env and secrets
+.env
+*.log
+
+# Development
+*.md
+docker-compose.yaml
+Dockerfile
+
+# OS and editor files
+*.swp
+*.DS_Store
+*.bak
+*.tmp
