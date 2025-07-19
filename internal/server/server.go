@@ -2,10 +2,7 @@ package server
 
 import (
     "fmt"
-<<<<<<< HEAD
-=======
     "gorm.io/gorm"
->>>>>>> 0a4a71f (feat(db): add users table migration, seed data, and GORM model; update config)
     "net/http"
     "os"
     "strconv"
@@ -18,30 +15,6 @@ import (
 
 type Server struct {
     port int
-<<<<<<< HEAD
-
-    db database.Service
-}
-
-func NewServer() *http.Server {
-    port, _ := strconv.Atoi(os.Getenv("APP_PORT"))
-    NewServer := &Server{
-        port: port,
-
-        db: database.New(),
-    }
-
-    // Declare Server config
-    server := &http.Server{
-        Addr:         fmt.Sprintf(":%d", NewServer.port),
-        Handler:      NewServer.RegisterRoutes(),
-        IdleTimeout:  time.Minute,
-        ReadTimeout:  10 * time.Second,
-        WriteTimeout: 30 * time.Second,
-    }
-
-    return server
-=======
     db   *gorm.DB
 }
 
@@ -68,5 +41,4 @@ func NewServer() (*http.Server, error) {
     }
 
     return server, nil
->>>>>>> 0a4a71f (feat(db): add users table migration, seed data, and GORM model; update config)
 }
