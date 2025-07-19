@@ -1,39 +1,44 @@
 package server
 
 import (
-	"fmt"
-	"net/http"
-	"os"
-	"strconv"
-	"time"
+    "fmt"
+    "gorm.io/gorm"
+    "net/http"
+    "os"
+    "strconv"
+    "time"
 
-	_ "github.com/joho/godotenv/autoload"
+    _ "github.com/joho/godotenv/autoload"
 
-	"github.com/A-lHasan-AlKhatib/game-matchmaker-api/internal/database"
+    "github.com/A-lHasan-AlKhatib/game-matchmaker-api/internal/database"
 )
 
 type Server struct {
-	port int
-
-	db database.Service
+    port int
+    db   *gorm.DB
 }
 
-func NewServer() *http.Server {
-	port, _ := strconv.Atoi(os.Getenv("PORT"))
-	NewServer := &Server{
-		port: port,
+func NewServer() (*http.Server, error) {
+    port, _ := strconv.Atoi(os.Getenv("APP_PORT"))
 
-		db: database.New(),
-	}
+    db, err := database.Connect()
+    if err != nil {
+        return nil, fmt.Errorf("failed to initialize server: %v", err)
+    }
 
-	// Declare Server config
-	server := &http.Server{
-		Addr:         fmt.Sprintf(":%d", NewServer.port),
-		Handler:      NewServer.RegisterRoutes(),
-		IdleTimeout:  time.Minute,
-		ReadTimeout:  10 * time.Second,
-		WriteTimeout: 30 * time.Second,
-	}
+    NewServer := &Server{
+        port: port,
+        db:   db,
+    }
 
-	return server
+    // Declare Server config
+    server := &http.Server{
+        Addr:         fmt.Sprintf(":%d", NewServer.port),
+        Handler:      NewServer.RegisterRoutes(),
+        IdleTimeout:  time.Minute,
+        ReadTimeout:  10 * time.Second,
+        WriteTimeout: 30 * time.Second,
+    }
+
+    return server, nil
 }
