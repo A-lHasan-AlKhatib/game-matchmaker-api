@@ -143,6 +143,10 @@ Use `make` to streamline common tasks. Running `make` or `make help` shows all t
 
 ---
 
+This is a dummy commit for testing
+
+---
+
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
